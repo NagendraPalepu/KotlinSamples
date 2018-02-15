@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/u_black">
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/textHolderRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/genreHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/seeAll"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/home"
+            android:textAllCaps="true"
+            android:textColor="@color/u_white"
+            android:textSize="@dimen/u_font_size_normal"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/seeAll" />
+
+        <TextView
+            android:id="@+id/seeAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/home"
+            android:textAllCaps="true"
+            android:textColor="@color/u_white"
+            android:textSize="@dimen/u_font_size_normal"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textHolderRow"
+        android:layout_marginLeft="@dimen/u_home_standard_left_margin"
+        android:layout_marginTop="-12dp"
+        android:layout_marginStart="@dimen/u_home_standard_left_margin" />
+
+
+    <!--<RelativeLayout
+        android:id="@+id/home_carousel_big_tiles_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recycler_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/home_standard_left_margin"
+        android:layout_marginRight="@dimen/home_standard_left_margin" />-->
+
+</RelativeLayout>

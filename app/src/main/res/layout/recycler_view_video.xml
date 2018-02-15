@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_details"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="0dp">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_video_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:background="@drawable/card_border">
+
+        <ImageView
+            android:id="@+id/image_view_video_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@color/u_black"
+            android:scaleType="fitXY"
+            android:src="@mipmap/placeholder"
+            android:contentDescription="@string/upsrtcvideoposter" />
+
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/u_text_2_line_height"
+            android:layout_below="@+id/image_view_video_image"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/u_white"
+            android:textSize="@dimen/u_font_size_normal"
+            />
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
