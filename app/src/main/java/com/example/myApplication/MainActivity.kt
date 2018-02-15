@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
-import android.os.Parcelable
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
@@ -168,11 +167,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_movies -> {
                 val int = Intent(context, MoreVideosActivity::class.java)
                 int.putExtra(getString(R.string.contentType), AppUtility.contentTypeMovie)
+                int.putExtra(getString(R.string.from), false)
                 startActivity(int)
             }
             R.id.nav_videos -> {
                 val int = Intent(context, MoreVideosActivity::class.java)
                 int.putExtra(getString(R.string.contentType), AppUtility.contentTypeVideo)
+                int.putExtra(getString(R.string.from), false)
                 startActivity(int)
             }
         }
@@ -490,6 +491,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onClickEvent(movieDetailsData: MovieDetailsData) {
                 Toast.makeText(context, movieDetailsData.name, Toast.LENGTH_SHORT).show()
                 val int = Intent(context, PlayerActivity::class.java)
+                int.putExtra("selectedObject", movieDetailsData)
                 int.putExtra("playingUrl", movieDetailsData.playerUrl)
                 startActivity(int)
             }
@@ -499,8 +501,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         textView2.setOnClickListener({
             val int = Intent(context, MoreVideosActivity::class.java)
             int.putExtra(getString(R.string.contentType), contentType)
-            bundle= Bundle()
+            int.putExtra(getString(R.string.from), true)
+            bundle = Bundle()
             bundle!!.putParcelableArrayList("data", limitedList)
+            Log.e("--------", "------------>" + limitedList.size)
+            int.putExtra("bundle", bundle)
             startActivity(int)
         })
 

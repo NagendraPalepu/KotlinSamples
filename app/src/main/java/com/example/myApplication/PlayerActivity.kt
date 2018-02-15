@@ -6,14 +6,17 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
 import android.widget.LinearLayout
+import com.example.myApplication.model.MovieDetailsData
 import com.example.myApplication.player.EventLogger
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.ExtractorMediaSource
@@ -55,14 +58,15 @@ class PlayerActivity : AppCompatActivity() {
     private var displayMetrics: DisplayMetrics? = null
     private var height: Int? = 0
 
-    private var normalLayoutParams: LinearLayout.LayoutParams? = null
-    private var fullScreenLayoutParams: LinearLayout.LayoutParams? = null
+    private var normalLayoutParams: ConstraintLayout.LayoutParams? = null
+    private var fullScreenLayoutParams: ConstraintLayout.LayoutParams? = null
     private var width: Int? = 0
     private var playerHeight: Double? = 0.00
     private var requiredHeight: Int? = 35
     private var calculatedHeight: Double? = 0.00
     private var playingUrl: String? = ""
     private var fullScreenImageView: ImageView? = null
+    private var movieDetailsData: MovieDetailsData? = null
 
 
     override fun onDestroy() {
@@ -89,8 +93,11 @@ class PlayerActivity : AppCompatActivity() {
 
         playerHeight = height!!.times(calculatedHeight!!)
 
-        normalLayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, playerHeight!!.toInt())
-        fullScreenLayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        movieDetailsData = intent.extras.getParcelable("selectedObject")
+        Log.e("---------", "selectedMovie--->" + movieDetailsData!!.name)
+
+        normalLayoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, playerHeight!!.toInt())
+        fullScreenLayoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
 
 
         verticalScreenPlayer()
@@ -109,7 +116,7 @@ class PlayerActivity : AppCompatActivity() {
         })
 
 
-        backOnPlayer.setOnClickListener( {
+        backOnPlayer.setOnClickListener({
             if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 verticalScreenPlayer()
             } else {
@@ -118,6 +125,7 @@ class PlayerActivity : AppCompatActivity() {
         })
 
         createPlayer()
+        displaySynopsisData(movieDetailsData!!)
     }
 
 
@@ -251,4 +259,12 @@ class PlayerActivity : AppCompatActivity() {
 
         return MimeTypeMap.getFileExtensionFromUrl(encoded).toLowerCase()
     }
+
+
+    fun displaySynopsisData(movieDetailsData: MovieDetailsData) {
+        movieName.text = movieDetailsData.name
+    }
+
+
+
 }

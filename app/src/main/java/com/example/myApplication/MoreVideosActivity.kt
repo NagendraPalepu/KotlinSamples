@@ -1,6 +1,7 @@
 package com.example.myApplication
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.graphics.Point
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.myApplication.constants.AppUtility
@@ -17,7 +19,9 @@ import kotlinx.android.synthetic.main.activity_more_videos.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView.ScaleType.FIT_XY
 import android.widget.RelativeLayout
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.myApplication.constants.SpacesItemDecoration
 
@@ -32,10 +36,14 @@ class MoreVideosActivity : AppCompatActivity() {
     private var contentArrayList: ArrayList<MovieDetailsData> = arrayListOf()
     private var moreVideosAdapter: MoreVideosAdapter? = null
     private var spacesItemDecoration: SpacesItemDecoration? = null
+    private var from: Boolean? = null
+    private var bundle: Bundle? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_videos)
+        from = intent.extras.getBoolean(getString(R.string.from))
         backNavigation.setOnClickListener {
             finish()
         }
@@ -54,9 +62,18 @@ class MoreVideosActivity : AppCompatActivity() {
             else -> moreVideosTitle.setText(contentType, TextView.BufferType.NORMAL)
         }
 
+        bundle = intent.extras.getBundle("bundle")
 
-        this.contentString = sharedPreferences!!.getString(getString(R.string.contentString), getString(R.string.defaultValue))
-        contentArrayList = AppUtility.parseJson(contentString!!, this, contentType!!)
+        if (from!!) {
+
+            contentArrayList = bundle!!.getParcelableArrayList("data")
+            Log.e("======", "data--->" + contentArrayList.size)
+        } else {
+            this.contentString = sharedPreferences!!.getString(getString(R.string.contentString), getString(R.string.defaultValue))
+            contentArrayList = AppUtility.parseJson(contentString!!, this, contentType!!)
+        }
+
+
 
 
         contentDisplay(contentArrayList)
@@ -93,8 +110,8 @@ class MoreVideosActivity : AppCompatActivity() {
             return MyViewHolder(itemView)
         }
 
-        override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
-            holder?.textView!!.setText(adapterList[position].name, TextView.BufferType.NORMAL)
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            holder.textView!!.setText(adapterList[position].name, TextView.BufferType.NORMAL)
             Glide.with(adapterContext).load(adapterList[position].imagePath.replace("c_fill,g_north,w_250,h_250/", "")).into(holder.imageView).onLoadFailed(ContextCompat.getDrawable(adapterContext, R.mipmap.ic_launcher))
             val point: Point = if (this.adapterContentType.equals(AppUtility.contentTypeMovie, ignoreCase = true)) {
                 AppUtility.getGridMovieDimension(adapterContext)
@@ -103,11 +120,20 @@ class MoreVideosActivity : AppCompatActivity() {
             }
 
 
-            holder.imageView!!.scaleType = ImageView.ScaleType.FIT_XY
+            holder.imageView!!.scaleType = FIT_XY
             layoutParams = RelativeLayout.LayoutParams(point.x, point.y)
             holder.layout!!.layoutParams = layoutParams
             holder.textView!!.width = point.x
-            holder.imageView!!.scaleType = ImageView.ScaleType.FIT_XY
+            holder.imageView!!.scaleType = FIT_XY
+
+
+            holder.imageView!!.setOnClickListener {
+                Toast.makeText(adapterContext, adapterList[position].name, Toast.LENGTH_SHORT).show()
+                val int = Intent(adapterContext, PlayerActivity::class.java)
+                int.putExtra("selectedObject", adapterList[position])
+                int.putExtra("playingUrl", adapterList[position].playerUrl)
+                adapterContext.startActivity(int)
+            }
         }
 
         override fun getItemCount(): Int {

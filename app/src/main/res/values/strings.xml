@@ -41,5 +41,9 @@
     <string name="contentType">contentType</string>
     <string name="defaultValue" />
 
+    <string name="from">from</string>
+    <string name="movie_information_not_available">Movie Info not available</string>
+    <string name="empty">epmty</string>
+
 
 </resources>

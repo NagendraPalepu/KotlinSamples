@@ -11,4 +11,7 @@
     <dimen name="u_text_2_line_height">16dp</dimen>
     <dimen name="u_font_size_normal">13sp</dimen>
     <dimen name="u_video__recycler_view_Separator_padding_inner">-4sp</dimen>
+    <dimen name="ten">10dp</dimen>
+    <dimen name="five">5dp</dimen>
+    <dimen name="fifteen">15dp</dimen>
 </resources>
