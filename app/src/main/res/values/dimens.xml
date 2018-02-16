@@ -14,4 +14,9 @@
     <dimen name="ten">10dp</dimen>
     <dimen name="five">5dp</dimen>
     <dimen name="fifteen">15dp</dimen>
+    <dimen name="sixteen">16sp</dimen>
+    <dimen name="thirtyTwo">32dp</dimen>
+    <dimen name="twenty">20sp</dimen>
+    <dimen name="dimen_18">18sp</dimen>
+    <dimen name="dimen_25">25dp</dimen>
 </resources>
