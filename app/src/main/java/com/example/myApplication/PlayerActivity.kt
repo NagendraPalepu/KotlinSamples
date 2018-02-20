@@ -12,12 +12,8 @@ import android.support.v7.app.AppCompatActivity
 import android.text.*
 import android.text.style.ForegroundColorSpan
 import android.util.DisplayMetrics
-<<<<<<< HEAD
-import android.view.View
-=======
 import android.view.View.GONE
 import android.view.View.VISIBLE
->>>>>>> cd6d4a10463feecf933d3653a5364a9bb6e6288f
 import android.view.WindowManager
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
