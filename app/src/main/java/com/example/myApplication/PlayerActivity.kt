@@ -10,12 +10,10 @@ import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
-import android.widget.LinearLayout
 import com.example.myApplication.model.MovieDetailsData
 import com.example.myApplication.player.EventLogger
 import com.google.android.exoplayer2.*
@@ -94,7 +92,6 @@ class PlayerActivity : AppCompatActivity() {
         playerHeight = height!!.times(calculatedHeight!!)
 
         movieDetailsData = intent.extras.getParcelable("selectedObject")
-        Log.e("---------", "selectedMovie--->" + movieDetailsData!!.name)
 
         normalLayoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, playerHeight!!.toInt())
         fullScreenLayoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
