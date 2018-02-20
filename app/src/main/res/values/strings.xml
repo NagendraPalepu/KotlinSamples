@@ -35,7 +35,7 @@
     <string name="exopause">ExoPause</string>
     <string name="exofastforward">ExoFastforward</string>
     <string name="exofullscreen">exofullscreen</string>
-    <string name="stream_not_available">stream_not_available</string>
+    <string name="stream_not_available">streaming not available</string>
 
     <string name="contentString">contentString</string>
     <string name="contentType">contentType</string>
@@ -44,6 +44,12 @@
     <string name="from">from</string>
     <string name="movie_information_not_available">Movie Info not available</string>
     <string name="empty">epmty</string>
+    <string name="view_count">View Count</string>
+    <string name="share">Share</string>
+    <string name="like">Like</string>
+    <string name="castCrew">Cast_Crew :</string>
+    <string name="writtenBy">Written By : </string>
+    <string name="directedBy">Director : </string>
 
 
 </resources>

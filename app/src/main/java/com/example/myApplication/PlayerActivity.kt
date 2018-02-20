@@ -3,14 +3,21 @@ package com.example.myApplication
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
+import android.text.*
+import android.text.style.ForegroundColorSpan
 import android.util.DisplayMetrics
+<<<<<<< HEAD
 import android.view.View
+=======
+import android.view.View.GONE
+import android.view.View.VISIBLE
+>>>>>>> cd6d4a10463feecf933d3653a5364a9bb6e6288f
 import android.view.WindowManager
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
@@ -187,16 +194,16 @@ class PlayerActivity : AppCompatActivity() {
                         player!!.playWhenReady = (true)
                     }
                     Player.STATE_BUFFERING -> {
-                        progress.visibility = View.VISIBLE
-                        playerText.visibility = View.GONE
+                        progress.visibility = VISIBLE
+                        playerText.visibility = GONE
                     }
                     Player.STATE_IDLE -> {
-                        progress.visibility = View.GONE
-                        playerText.visibility = View.VISIBLE
+                        progress.visibility = GONE
+                        playerText.visibility = VISIBLE
                     }
                     else -> {
-                        progress.visibility = View.GONE
-                        playerText.visibility = View.GONE
+                        progress.visibility = GONE
+                        playerText.visibility = GONE
                     }
                 }
 
@@ -258,10 +265,86 @@ class PlayerActivity : AppCompatActivity() {
     }
 
 
-    fun displaySynopsisData(movieDetailsData: MovieDetailsData) {
+    private fun displaySynopsisData(movieDetailsData: MovieDetailsData) {
         movieName.text = movieDetailsData.name
+        viewCount.text = movieDetailsData.viewCount
+
+
+        if (movieDetailsData.castCrew == "" && movieDetailsData.director == "" && movieDetailsData.writtenBy == "" && movieDetailsData.synopsis == "") {
+            noSynopsisInfo.visibility = VISIBLE
+            movieCastCrew.visibility = GONE
+            movieWriters.visibility = GONE
+            movieDirector.visibility = GONE
+            synopsisData.visibility = GONE
+
+        } else {
+            noSynopsisInfo.visibility = GONE
+            if (movieDetailsData.castCrew != "") {
+                val castCrew: String = formatTextView(getString(R.string.castCrew), movieDetailsData.castCrew)
+                movieCastCrew.text = castCrew
+                movieCastCrew.visibility = VISIBLE
+            } else {
+                movieCastCrew.visibility = GONE
+            }
+
+            if (movieDetailsData.writtenBy != "") {
+                val writtenBy: String = formatTextView(getString(R.string.writtenBy) , movieDetailsData.writtenBy)
+                movieWriters.text = writtenBy
+                movieWriters.visibility = VISIBLE
+            } else {
+                movieWriters.visibility = GONE
+            }
+
+
+            if (movieDetailsData.director != "") {
+                val directedBy: String = getString(R.string.directedBy) + movieDetailsData.director
+                movieDirector.text = directedBy
+                movieDirector.visibility = VISIBLE
+            } else {
+                movieDirector.visibility = GONE
+            }
+            if (movieDetailsData.synopsis != "") {
+                movieSynopsisText.text = movieDetailsData.synopsis
+                movieSynopsisText.visibility = VISIBLE
+            } else {
+                movieSynopsisText.visibility = GONE
+            }
+        }
+
+
+        synopsisViewLayout.setOnClickListener {
+            if (!synopsisVisibility!!) {
+                synopsisVisibility = true
+                imageViewMoreData.setImageResource(R.drawable.up)
+                synopsisData.visibility = VISIBLE
+            } else {
+                synopsisVisibility = false
+                imageViewMoreData.setImageResource(R.drawable.down)
+                synopsisData.visibility = GONE
+            }
+        }
+
+
     }
 
+
+    private fun formatTextView(firstString: String, secondString: String): String {
+
+        val builder: SpannableStringBuilder? = SpannableStringBuilder()
+
+        val str1: SpannableString? = SpannableString(firstString)
+        str1!!.setSpan(ForegroundColorSpan(Color.RED), 0, firstString.length, 0)
+        builder!!.append(str1)
+
+        val str2: SpannableString? = SpannableString(secondString)
+        str2!!.setSpan(ForegroundColorSpan(Color.WHITE), 0, secondString.length, 0)
+        builder.append(str2)
+
+        return builder.toString()
+    }
+
+
+    private var synopsisVisibility: Boolean? = true
 
 
 }
