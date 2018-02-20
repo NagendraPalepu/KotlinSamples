@@ -5,25 +5,24 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.graphics.Point
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
-import com.example.myApplication.constants.AppUtility
-import com.example.myApplication.model.MovieDetailsData
-import kotlinx.android.synthetic.main.activity_more_videos.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ImageView.ScaleType.FIT_XY
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.myApplication.constants.AppUtility
 import com.example.myApplication.constants.SpacesItemDecoration
+import com.example.myApplication.model.MovieDetailsData
+import kotlinx.android.synthetic.main.activity_more_videos.*
 
 
 class MoreVideosActivity : AppCompatActivity() {
@@ -65,9 +64,7 @@ class MoreVideosActivity : AppCompatActivity() {
         bundle = intent.extras.getBundle("bundle")
 
         if (from!!) {
-
             contentArrayList = bundle!!.getParcelableArrayList("data")
-            Log.e("======", "data--->" + contentArrayList.size)
         } else {
             this.contentString = sharedPreferences!!.getString(getString(R.string.contentString), getString(R.string.defaultValue))
             contentArrayList = AppUtility.parseJson(contentString!!, this, contentType!!)
