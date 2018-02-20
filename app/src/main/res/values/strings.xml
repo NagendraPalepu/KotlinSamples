@@ -4,8 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="ad_tag_url"><![CDATA[https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=]]></string>
-
     <string name="homepagelogo" />
     <string name="searchicon" />
     <string name="upsrtcplacholder" />
@@ -23,7 +21,6 @@
 
     <string name="selection_disabled">Disabled</string>
     <string name="selection_default">Default</string>
-    <string name="selection_default_none">Default (none)</string>
     <string name="enable_random_adaptation">Enable random adaptation</string>
 
 
@@ -43,7 +40,7 @@
 
     <string name="from">from</string>
     <string name="movie_information_not_available">Movie Info not available</string>
-    <string name="empty">epmty</string>
+    <string name="empty">empty</string>
     <string name="view_count">View Count</string>
     <string name="share">Share</string>
     <string name="like">Like</string>

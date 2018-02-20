@@ -7,7 +7,7 @@ import android.os.Parcelable
  */
 
 
-class MovieDetailsData internal constructor(var name: String, var imagePath: String, var synopsis: String, var playerUrl: String, var releaseDate: String, var director: String, var castCrew: String, var writtenBy: String, var runTime: String, var viewCount: String, var genre: String, var contentType: String, var genresJson: String) : Parcelable {
+class MovieDetailsData internal constructor(var name: String, var imagePath: String, var synopsis: String, var playerUrl: String, private var releaseDate: String, var director: String, var castCrew: String, var writtenBy: String, private var runTime: String, var viewCount: String, private var genre: String, private var contentType: String, private var genresJson: String) : Parcelable {
 
     private constructor(parcel: Parcel) : this(parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString())
 

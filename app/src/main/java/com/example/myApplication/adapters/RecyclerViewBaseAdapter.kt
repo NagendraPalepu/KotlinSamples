@@ -41,10 +41,10 @@ open class RecyclerViewBaseAdapter(private val videoDTOs: ArrayList<MovieDetails
 
 
     override fun getItemCount(): Int {
-        if (videoDTOs.size > 5) {
-            return 5
+        return if (videoDTOs.size > 5) {
+            5
         } else {
-            return videoDTOs.size
+            videoDTOs.size
         }
     }
 

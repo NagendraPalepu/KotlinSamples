@@ -17,6 +17,7 @@ import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import com.example.myApplication.model.MovieDetailsData
 import com.example.myApplication.player.EventLogger
 import com.google.android.exoplayer2.*
@@ -61,9 +62,13 @@ class PlayerActivity : AppCompatActivity() {
 
     private var normalLayoutParams: ConstraintLayout.LayoutParams? = null
     private var fullScreenLayoutParams: ConstraintLayout.LayoutParams? = null
+
+    private var normalPlayerLayoutParams: RelativeLayout.LayoutParams? = null
+    private var fullScreenPlayerLayoutParams: RelativeLayout.LayoutParams? = null
+
     private var width: Int? = 0
     private var playerHeight: Double? = 0.00
-    private var requiredHeight: Int? = 35
+    private var requiredHeight: Int? = 38
     private var calculatedHeight: Double? = 0.00
     private var playingUrl: String? = ""
     private var fullScreenImageView: ImageView? = null
@@ -98,6 +103,9 @@ class PlayerActivity : AppCompatActivity() {
 
         normalLayoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, playerHeight!!.toInt())
         fullScreenLayoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
+
+        normalPlayerLayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, playerHeight!!.toInt())
+        fullScreenPlayerLayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
 
 
         verticalScreenPlayer()
@@ -141,12 +149,14 @@ class PlayerActivity : AppCompatActivity() {
     private fun horizontalScreenPlayer() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         frameLayout.layoutParams = fullScreenLayoutParams
+        simpleExoPlayerView!!.layoutParams=fullScreenPlayerLayoutParams
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     private fun verticalScreenPlayer() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         frameLayout.layoutParams = normalLayoutParams
+        simpleExoPlayerView!!.layoutParams=normalPlayerLayoutParams
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
